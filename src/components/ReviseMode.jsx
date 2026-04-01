@@ -1,8 +1,9 @@
-import { useState, useMemo } from 'react'
-import { Search, Bookmark, BookmarkCheck, X, Lightbulb } from 'lucide-react'
+import { useState, useMemo, useEffect } from 'react'
+import { Search, Bookmark, BookmarkCheck, X, Lightbulb, ChevronLeft, ChevronRight } from 'lucide-react'
 import Header from './Header'
 
 const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F']
+const PAGE_SIZE = 20
 
 function normalize(str) {
   return str.toLowerCase().trim()
@@ -10,6 +11,7 @@ function normalize(str) {
 
 export default function ReviseMode({ topic, onBack, isBookmarked, onToggleBookmark }) {
   const [query, setQuery] = useState('')
+  const [page, setPage] = useState(1)
 
   const filtered = useMemo(() => {
     if (!query.trim()) return topic.data
@@ -20,6 +22,18 @@ export default function ReviseMode({ topic, onBack, isBookmarked, onToggleBookma
       normalize(item.explanation_bn).includes(q)
     )
   }, [query, topic.data])
+
+  // Reset to page 1 when search changes
+  useEffect(() => { setPage(1) }, [query])
+
+  const totalPages = Math.ceil(filtered.length / PAGE_SIZE)
+  const pageItems = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
+  const startNum = (page - 1) * PAGE_SIZE + 1
+
+  function goTo(p) {
+    setPage(p)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 
   return (
     <div className="min-h-screen bg-slate-900">
@@ -47,18 +61,25 @@ export default function ReviseMode({ topic, onBack, isBookmarked, onToggleBookma
         </div>
 
         {/* Counter */}
-        <p className="text-xs text-slate-400 mb-4 font-mono">
-          {filtered.length} / {topic.data.length} questions
-          {query && <span className="ml-1 text-sky-400">for "{query}"</span>}
-        </p>
+        <div className="flex items-center justify-between mb-4">
+          <p className="text-xs text-slate-400 font-mono">
+            {filtered.length} / {topic.data.length} questions
+            {query && <span className="ml-1 text-sky-400">for "{query}"</span>}
+          </p>
+          {totalPages > 1 && (
+            <p className="text-xs text-slate-500 font-mono">
+              Page {page} / {totalPages}
+            </p>
+          )}
+        </div>
 
         {/* Questions */}
         <div className="flex flex-col gap-4">
-          {filtered.map((item, idx) => (
+          {pageItems.map((item, idx) => (
             <QuestionCard
               key={item.id}
               item={item}
-              num={idx + 1}
+              num={startNum + idx}
               accent={topic.accent}
               bookmarked={isBookmarked(item.id)}
               onBookmark={() => onToggleBookmark(item.id)}
@@ -71,7 +92,66 @@ export default function ReviseMode({ topic, onBack, isBookmarked, onToggleBookma
             </div>
           )}
         </div>
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <Pagination page={page} totalPages={totalPages} onGoTo={goTo} accent={topic.accent} />
+        )}
       </div>
+    </div>
+  )
+}
+
+function Pagination({ page, totalPages, onGoTo, accent }) {
+  // Build page number list with ellipsis
+  function getPages() {
+    const pages = []
+    if (totalPages <= 7) {
+      for (let i = 1; i <= totalPages; i++) pages.push(i)
+      return pages
+    }
+    pages.push(1)
+    if (page > 3) pages.push('...')
+    for (let i = Math.max(2, page - 1); i <= Math.min(totalPages - 1, page + 1); i++) pages.push(i)
+    if (page < totalPages - 2) pages.push('...')
+    pages.push(totalPages)
+    return pages
+  }
+
+  return (
+    <div className="flex items-center justify-center gap-2 mt-8 mb-6">
+      <button
+        onClick={() => onGoTo(page - 1)}
+        disabled={page === 1}
+        className="p-2 rounded-lg bg-slate-800 border border-slate-700 text-slate-400 hover:text-white hover:border-slate-500 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+      >
+        <ChevronLeft size={16} />
+      </button>
+
+      {getPages().map((p, i) =>
+        p === '...'
+          ? <span key={`e${i}`} className="w-8 text-center text-slate-500 text-sm">…</span>
+          : <button
+              key={p}
+              onClick={() => onGoTo(p)}
+              className="w-9 h-9 rounded-lg text-sm font-semibold transition-all border"
+              style={
+                p === page
+                  ? { background: accent, borderColor: accent, color: '#fff' }
+                  : { background: 'transparent', borderColor: '#334155', color: '#94a3b8' }
+              }
+            >
+              {p}
+            </button>
+      )}
+
+      <button
+        onClick={() => onGoTo(page + 1)}
+        disabled={page === totalPages}
+        className="p-2 rounded-lg bg-slate-800 border border-slate-700 text-slate-400 hover:text-white hover:border-slate-500 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+      >
+        <ChevronRight size={16} />
+      </button>
     </div>
   )
 }
