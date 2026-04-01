@@ -39,41 +39,49 @@ export default function ReviseMode({ topic, onBack, isBookmarked, onToggleBookma
     <div className="min-h-screen bg-slate-900">
       <Header title={topic.title} onBack={onBack} />
 
-      <div className="max-w-3xl mx-auto px-4 py-4">
-        {/* Search bar */}
-        <div className="relative mb-4">
-          <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-          <input
-            type="text"
-            value={query}
-            onChange={e => setQuery(e.target.value)}
-            placeholder="প্রশ্ন, অপশন বা ব্যাখ্যায় খুঁজুন..."
-            className="w-full bg-slate-800 border border-slate-700 rounded-xl pl-9 pr-10 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-slate-500"
-          />
-          {query && (
-            <button
-              onClick={() => setQuery('')}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
-            >
-              <X size={15} />
-            </button>
+      {/* Sticky toolbar: search + pagination */}
+      <div className="sticky top-14 z-40 bg-slate-900/95 backdrop-blur border-b border-slate-700/60">
+        <div className="max-w-3xl mx-auto px-4 py-3 flex items-center gap-3">
+          {/* Search */}
+          <div className="relative flex-1">
+            <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+            <input
+              type="text"
+              value={query}
+              onChange={e => setQuery(e.target.value)}
+              placeholder="প্রশ্ন, অপশন বা ব্যাখ্যায় খুঁজুন..."
+              className="w-full bg-slate-800 border border-slate-700 rounded-xl pl-9 pr-9 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-slate-500"
+            />
+            {query && (
+              <button
+                onClick={() => setQuery('')}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
+              >
+                <X size={14} />
+              </button>
+            )}
+          </div>
+
+          {/* Pagination controls */}
+          {totalPages > 1 && (
+            <Pagination page={page} totalPages={totalPages} onGoTo={goTo} accent={topic.accent} />
           )}
         </div>
 
-        {/* Counter */}
-        <div className="flex items-center justify-between mb-4">
-          <p className="text-xs text-slate-400 font-mono">
+        {/* Counter row */}
+        <div className="max-w-3xl mx-auto px-4 pb-2 flex items-center justify-between">
+          <p className="text-xs text-slate-500 font-mono">
             {filtered.length} / {topic.data.length} questions
-            {query && <span className="ml-1 text-sky-400">for "{query}"</span>}
+            {query && <span className="ml-1 text-sky-400">"{query}"</span>}
           </p>
           {totalPages > 1 && (
-            <p className="text-xs text-slate-500 font-mono">
-              Page {page} / {totalPages}
-            </p>
+            <p className="text-xs text-slate-500 font-mono">Page {page} / {totalPages}</p>
           )}
         </div>
+      </div>
 
-        {/* Questions */}
+      {/* Questions */}
+      <div className="max-w-3xl mx-auto px-4 py-4">
         <div className="flex flex-col gap-4">
           {pageItems.map((item, idx) => (
             <QuestionCard
@@ -92,21 +100,15 @@ export default function ReviseMode({ topic, onBack, isBookmarked, onToggleBookma
             </div>
           )}
         </div>
-
-        {/* Pagination */}
-        {totalPages > 1 && (
-          <Pagination page={page} totalPages={totalPages} onGoTo={goTo} accent={topic.accent} />
-        )}
       </div>
     </div>
   )
 }
 
 function Pagination({ page, totalPages, onGoTo, accent }) {
-  // Build page number list with ellipsis
   function getPages() {
     const pages = []
-    if (totalPages <= 7) {
+    if (totalPages <= 5) {
       for (let i = 1; i <= totalPages; i++) pages.push(i)
       return pages
     }
@@ -119,22 +121,22 @@ function Pagination({ page, totalPages, onGoTo, accent }) {
   }
 
   return (
-    <div className="flex items-center justify-center gap-2 mt-8 mb-6">
+    <div className="flex items-center gap-1 shrink-0">
       <button
         onClick={() => onGoTo(page - 1)}
         disabled={page === 1}
-        className="p-2 rounded-lg bg-slate-800 border border-slate-700 text-slate-400 hover:text-white hover:border-slate-500 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+        className="p-1.5 rounded-lg bg-slate-800 border border-slate-700 text-slate-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
       >
-        <ChevronLeft size={16} />
+        <ChevronLeft size={14} />
       </button>
 
       {getPages().map((p, i) =>
         p === '...'
-          ? <span key={`e${i}`} className="w-8 text-center text-slate-500 text-sm">…</span>
+          ? <span key={`e${i}`} className="w-6 text-center text-slate-500 text-xs">…</span>
           : <button
               key={p}
               onClick={() => onGoTo(p)}
-              className="w-9 h-9 rounded-lg text-sm font-semibold transition-all border"
+              className="w-8 h-8 rounded-lg text-xs font-semibold transition-all border"
               style={
                 p === page
                   ? { background: accent, borderColor: accent, color: '#fff' }
@@ -148,9 +150,9 @@ function Pagination({ page, totalPages, onGoTo, accent }) {
       <button
         onClick={() => onGoTo(page + 1)}
         disabled={page === totalPages}
-        className="p-2 rounded-lg bg-slate-800 border border-slate-700 text-slate-400 hover:text-white hover:border-slate-500 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+        className="p-1.5 rounded-lg bg-slate-800 border border-slate-700 text-slate-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
       >
-        <ChevronRight size={16} />
+        <ChevronRight size={14} />
       </button>
     </div>
   )
