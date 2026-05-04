@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <rect width="48" height="48" rx="12" fill="#0f172a"/>
+  <!-- Circuit board traces -->
+  <path d="M8 24 H16 M32 24 H40" stroke="#334155" stroke-width="2" stroke-linecap="round"/>
+  <path d="M24 8 V16 M24 32 V40" stroke="#334155" stroke-width="2" stroke-linecap="round"/>
+  <!-- Outer nodes -->
+  <circle cx="8" cy="24" r="2.5" fill="#3b82f6"/>
+  <circle cx="40" cy="24" r="2.5" fill="#3b82f6"/>
+  <circle cx="24" cy="8"  r="2.5" fill="#3b82f6"/>
+  <circle cx="24" cy="40" r="2.5" fill="#3b82f6"/>
+  <!-- Lightning bolt (center) -->
+  <path d="M27 14 L20 25 H25 L21 34 L30 22 H25 Z" fill="#38bdf8"/>
+</svg>
