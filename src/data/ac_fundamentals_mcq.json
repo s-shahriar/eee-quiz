@@ -698,5 +698,131 @@
     ],
     "correct_answer": "পাওয়ার ফ্যাক্টর খুব বেশি ল্যাগিং (যেমন 0.8 এর নিচে) হয়",
     "explanation_bn": "PDB/REB নিয়ম অনুযায়ী পাওয়ার ফ্যাক্টর সাধারণত ০.৯ এর উপরে রাখতে হয়। ০.৮ এর নিচে গেলে জরিমানা (Penalty) করা হয়। কারণ লো PF-এ অতিরিক্ত রিঅ্যাক্টিভ কারেন্ট সিস্টেমের সম্পদ অপচয় করে।"
+  },
+  {
+    "id": "ac_q51",
+    "chapter": 2,
+    "chapter_title": "AC Fundamentals & 3-Phase System",
+    "question": "A capacitor is generally a:",
+    "options": [
+      "Linear and bilateral component",
+      "Non-linear and active component",
+      "Bilateral and active component",
+      "Active, passive, linear and non-linear component"
+    ],
+    "correct_answer": "Linear and bilateral component",
+    "explanation_bn": ""
+  },
+  {
+    "id": "ac_q53",
+    "chapter": 2,
+    "chapter_title": "AC Fundamentals & 3-Phase System",
+    "question": "The time delay for a phase angle of 45 degrees at the frequency of 500 Hz will be:",
+    "options": [
+      "0.25 ms",
+      "2.5 ms",
+      "25 ms",
+      "250 ms"
+    ],
+    "correct_answer": "0.25 ms",
+    "explanation_bn": ""
+  },
+  {
+    "id": "ac_q55",
+    "chapter": 2,
+    "chapter_title": "AC Fundamentals & 3-Phase System",
+    "question": "How much will be the inductance of a coil that induces 40 V when its current changes at the rate of 4 A per second?",
+    "options": [
+      "0.1 mH",
+      "1 mH",
+      "0.1 H",
+      "10 H"
+    ],
+    "correct_answer": "10 H",
+    "explanation_bn": ""
+  },
+  {
+    "id": "ac_q57",
+    "chapter": 2,
+    "chapter_title": "AC Fundamentals & 3-Phase System",
+    "question": "A constant current of 5 mA charges a 10 uF capacitor for one second. The voltage across the capacitor will be:",
+    "options": [
+      "5 V",
+      "50 V",
+      "500 V",
+      "5000 V"
+    ],
+    "correct_answer": "500 V",
+    "explanation_bn": ""
+  },
+  {
+    "id": "ac_q59",
+    "chapter": 2,
+    "chapter_title": "AC Fundamentals & 3-Phase System",
+    "question": "A low pass filter is composed of n sections having series arms of 63.6 mH inductance and shunt arms of 0.088 uF each. The cut-off frequency will be nearly:",
+    "options": [
+      "1500 Hz",
+      "3000 Hz",
+      "6000 Hz",
+      "7500 Hz"
+    ],
+    "correct_answer": "3000 Hz",
+    "explanation_bn": ""
+  },
+  {
+    "id": "ac_q61",
+    "chapter": 2,
+    "chapter_title": "AC Fundamentals & 3-Phase System",
+    "question": "The power consumed in a pure capacitive circuit is:",
+    "options": [
+      "CV",
+      "CV^2/2",
+      "C^2V/2",
+      "Zero"
+    ],
+    "correct_answer": "Zero",
+    "explanation_bn": ""
+  },
+  {
+    "id": "ac_q63",
+    "chapter": 2,
+    "chapter_title": "AC Fundamentals & 3-Phase System",
+    "question": "The power factor of an R-C circuit is:",
+    "options": [
+      "Often zero",
+      "Between zero and 1",
+      "Always unity",
+      "Between zero and -1.0"
+    ],
+    "correct_answer": "Between zero and 1",
+    "explanation_bn": ""
+  },
+  {
+    "id": "ac_q65",
+    "chapter": 2,
+    "chapter_title": "AC Fundamentals & 3-Phase System",
+    "question": "The voltage applied across an R-L circuit is equal to __ of V_R and V_L:",
+    "options": [
+      "Arithmetic sum",
+      "Algebraic sum",
+      "Phasor sum",
+      "Sum of the squares"
+    ],
+    "correct_answer": "Phasor sum",
+    "explanation_bn": ""
+  },
+  {
+    "id": "ac_q67",
+    "chapter": 2,
+    "chapter_title": "AC Fundamentals & 3-Phase System",
+    "question": "Which of the following is incorrect about alternating current?",
+    "options": [
+      "Frequency is zero",
+      "Magnitude changes with time",
+      "Can be transported to larger distances with less loss in power",
+      "Flows in both directions"
+    ],
+    "correct_answer": "Frequency is zero",
+    "explanation_bn": ""
   }
 ]

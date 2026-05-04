@@ -698,5 +698,299 @@
     ],
     "correct_answer": "আর্মেচার কারেন্টকে লিমিট/নিয়ন্ত্রণ করা",
     "explanation_bn": "DC মোটরে ব্যাক EMF (Back EMF বা Counter EMF) আর্মেচার কারেন্টকে নিয়ন্ত্রণ বা সীমিত (Limit) করার প্রধান কাজ করে। সূত্র: Ia = (V - Eb) / Ra মোটর চালু হওয়ার সময় Eb = 0, তাই স্টার্টিং কারেন্ট অনেক বেশি হয়। মোটরের গতি বাড়লে Eb বাড়ে এবং আর্মেচার কারেন্ট (Ia) কমে যায়।"
+  },
+  {
+    "id": "dc_q51",
+    "chapter": 1,
+    "chapter_title": "DC Circuit Theory",
+    "question": "In a linear, bilateral network having more than one source, the current and voltage in any part of the network can be found by adding algebraically the effect of each source separately.",
+    "options": [
+      "Superposition theorem",
+      "Thevenin's theorem",
+      "Norton's theorem",
+      "Millman's theorem"
+    ],
+    "correct_answer": "Superposition theorem",
+    "explanation_bn": ""
+  },
+  {
+    "id": "dc_q53",
+    "chapter": 1,
+    "chapter_title": "DC Circuit Theory",
+    "question": "Any network with two open terminals a and b can be replaced by a single voltage source V_Th in series with a single resistance R_Th driving the ab terminals.",
+    "options": [
+      "Superposition theorem",
+      "Thevenin's theorem",
+      "Norton's theorem",
+      "None of the above"
+    ],
+    "correct_answer": "Thevenin's theorem",
+    "explanation_bn": ""
+  },
+  {
+    "id": "dc_q55",
+    "chapter": 1,
+    "chapter_title": "DC Circuit Theory",
+    "question": "Any two-terminal network can be replaced by a single current source I_N in parallel with a single resistance R_N.",
+    "options": [
+      "Superposition theorem",
+      "Thevenin's theorem",
+      "Norton's theorem",
+      "Millman's theorem"
+    ],
+    "correct_answer": "Norton's theorem",
+    "explanation_bn": ""
+  },
+  {
+    "id": "dc_q57",
+    "chapter": 1,
+    "chapter_title": "DC Circuit Theory",
+    "question": "Kirchhoff's law is not applicable to circuits with:",
+    "options": [
+      "Non-linear resistances",
+      "Passive elements",
+      "Distributed parameters",
+      "Lumped parameters"
+    ],
+    "correct_answer": "Distributed parameters",
+    "explanation_bn": ""
+  },
+  {
+    "id": "dc_q59",
+    "chapter": 1,
+    "chapter_title": "DC Circuit Theory",
+    "question": "A star network has each element of value R. The value of elements of the equivalent delta network will be:",
+    "options": [
+      "R/2",
+      "R",
+      "3R/2",
+      "3R"
+    ],
+    "correct_answer": "3R",
+    "explanation_bn": ""
+  },
+  {
+    "id": "dc_q61",
+    "chapter": 1,
+    "chapter_title": "DC Circuit Theory",
+    "question": "Kirchhoff's law is applicable to:",
+    "options": [
+      "AC circuits only",
+      "DC circuits only",
+      "Both AC as well as DC circuits",
+      "Passive networks only"
+    ],
+    "correct_answer": "Both AC as well as DC circuits",
+    "explanation_bn": ""
+  },
+  {
+    "id": "dc_q63",
+    "chapter": 1,
+    "chapter_title": "DC Circuit Theory",
+    "question": "Which of the following represents a relation for a non-linear resistor?",
+    "options": [
+      "v = -5i",
+      "i + 5v = 0",
+      "i = 2v^3",
+      "None of the above"
+    ],
+    "correct_answer": "i = 2v^3",
+    "explanation_bn": ""
+  },
+  {
+    "id": "dc_q65",
+    "chapter": 1,
+    "chapter_title": "DC Circuit Theory",
+    "question": "Kirchhoff's voltage law applies to circuits with:",
+    "options": [
+      "Linear elements only",
+      "Non-linear elements only",
+      "Linear, non-linear, active and passive elements",
+      "Linear, non-linear, active, passive, time-varying as well as time-invariant elements"
+    ],
+    "correct_answer": "Linear, non-linear, active, passive, time-varying as well as time-invariant elements",
+    "explanation_bn": ""
+  },
+  {
+    "id": "dc_q67",
+    "chapter": 1,
+    "chapter_title": "DC Circuit Theory",
+    "question": "If the function or characteristics of a circuit remains the same whatever the direction of its operation, the circuit is known as:",
+    "options": [
+      "Active",
+      "Passive",
+      "Non-linear",
+      "Bilateral"
+    ],
+    "correct_answer": "Bilateral",
+    "explanation_bn": ""
+  },
+  {
+    "id": "dc_q69",
+    "chapter": 1,
+    "chapter_title": "DC Circuit Theory",
+    "question": "If a circuit does not contain any source of energy or emf, it is known as:",
+    "options": [
+      "Active network",
+      "Passive network",
+      "Unilateral circuit",
+      "Bilateral circuit"
+    ],
+    "correct_answer": "Passive network",
+    "explanation_bn": ""
+  },
+  {
+    "id": "dc_q71",
+    "chapter": 1,
+    "chapter_title": "DC Circuit Theory",
+    "question": "A circuit has resistors, capacitors, and semiconductor diodes. The circuit will be known as:",
+    "options": [
+      "Linear circuit",
+      "Bilateral circuit",
+      "Non-linear circuit",
+      "None of the above"
+    ],
+    "correct_answer": "Non-linear circuit",
+    "explanation_bn": ""
+  },
+  {
+    "id": "dc_q73",
+    "chapter": 1,
+    "chapter_title": "DC Circuit Theory",
+    "question": "Which of the following is a non-linear circuit parameter?",
+    "options": [
+      "Wire-wound resistor",
+      "Condenser",
+      "Transistor",
+      "Inductance"
+    ],
+    "correct_answer": "Transistor",
+    "explanation_bn": ""
+  },
+  {
+    "id": "dc_q75",
+    "chapter": 1,
+    "chapter_title": "DC Circuit Theory",
+    "question": "A circuit having the same properties in either direction is known as:",
+    "options": [
+      "Bilateral circuit",
+      "Non-linear circuit",
+      "Passive network",
+      "None of the above"
+    ],
+    "correct_answer": "Bilateral circuit",
+    "explanation_bn": ""
+  },
+  {
+    "id": "dc_q77",
+    "chapter": 1,
+    "chapter_title": "DC Circuit Theory",
+    "question": "Which of the following is a linear and bilateral parameter?",
+    "options": [
+      "Transistor",
+      "Semiconductor diodes",
+      "Electron tubes",
+      "Resistors"
+    ],
+    "correct_answer": "Resistors",
+    "explanation_bn": ""
+  },
+  {
+    "id": "dc_q79",
+    "chapter": 1,
+    "chapter_title": "DC Circuit Theory",
+    "question": "The unit for electrical conductivity is:",
+    "options": [
+      "Ohms/metre",
+      "Mho/metre",
+      "Mho-metre",
+      "Mho"
+    ],
+    "correct_answer": "Mho/metre",
+    "explanation_bn": ""
+  },
+  {
+    "id": "dc_q81",
+    "chapter": 1,
+    "chapter_title": "DC Circuit Theory",
+    "question": "Resistance : Ohm ::",
+    "options": [
+      "Inductance : Farad",
+      "Capacitance : Henry",
+      "Conductance : mho",
+      "Lumen : Steradian"
+    ],
+    "correct_answer": "Conductance : mho",
+    "explanation_bn": ""
+  },
+  {
+    "id": "dc_q83",
+    "chapter": 1,
+    "chapter_title": "DC Circuit Theory",
+    "question": "An essential condition for Ohm's law to be applicable to a circuit is that:",
+    "options": [
+      "Resistance must be at room temperature",
+      "Voltage should be only DC",
+      "The current should flow in the forward direction only",
+      "The resistance must be uniform"
+    ],
+    "correct_answer": "The resistance must be uniform",
+    "explanation_bn": ""
+  },
+  {
+    "id": "dc_q85",
+    "chapter": 1,
+    "chapter_title": "DC Circuit Theory",
+    "question": "A series RC circuit with R = 5000 Ohm and C = 20 uF has a constant voltage V = 100 V applied at t = 0. The equation for instantaneous current i will be:",
+    "options": [
+      "i = 0.02 e^(10t)",
+      "i = 0.02 e^(-10t)",
+      "i = 0.02 e^(-5t)",
+      "i = 0.01 e^(5t)"
+    ],
+    "correct_answer": "i = 0.02 e^(-10t)",
+    "explanation_bn": ""
+  },
+  {
+    "id": "dc_q87",
+    "chapter": 1,
+    "chapter_title": "DC Circuit Theory",
+    "question": "In a series R-L-C circuit, R = 100 Ohm, L = 0.5 H, and C = 40 uF. The resonant frequency is:",
+    "options": [
+      "35.7 Hz",
+      "50 Hz",
+      "55 Hz",
+      "67.7 Hz"
+    ],
+    "correct_answer": "35.7 Hz",
+    "explanation_bn": ""
+  },
+  {
+    "id": "dc_q89",
+    "chapter": 1,
+    "chapter_title": "DC Circuit Theory",
+    "question": "The algebraic sum of voltages around any closed path in a network is equal to ____________",
+    "options": [
+      "Infinity",
+      "1",
+      "0",
+      "Negative polarity"
+    ],
+    "correct_answer": "0",
+    "explanation_bn": ""
+  },
+  {
+    "id": "dc_q91",
+    "chapter": 1,
+    "chapter_title": "DC Circuit Theory",
+    "question": "Which of the following is correct about the power consumed by R1 and R2 connected in series if R1 > R2?",
+    "options": [
+      "R1 will consume more power",
+      "R2 will consume more power",
+      "R1 and R2 will consume the same power",
+      "The relationship cannot be established"
+    ],
+    "correct_answer": "R1 will consume more power",
+    "explanation_bn": ""
   }
 ]
