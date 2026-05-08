@@ -30,49 +30,52 @@ export default function App() {
     setQuizResult(null)
   }
 
-  if (screen === 'quiz' && activeTopic) {
-    return (
-      <QuizMode
-        key={activeTopic.id + '_quiz'}
-        topic={activeTopic}
-        onBack={goHome}
-        onFinish={handleQuizFinish}
-        isBookmarked={isBookmarked}
-        onToggleBookmark={toggle}
-      />
-    )
-  }
-
-  if (screen === 'revise' && activeTopic) {
-    return (
-      <ReviseMode
-        key={activeTopic.id + '_revise'}
-        topic={activeTopic}
-        onBack={goHome}
-        isBookmarked={isBookmarked}
-        onToggleBookmark={toggle}
-      />
-    )
-  }
-
-  if (screen === 'results' && activeTopic && quizResult) {
-    return (
-      <Results
-        topic={activeTopic}
-        correct={quizResult.correct}
-        wrong={quizResult.wrong}
-        total={quizResult.total}
-        onRetry={() => selectTopic(activeTopic, 'quiz')}
-        onRevise={() => selectTopic(activeTopic, 'revise')}
-        onHome={goHome}
-      />
-    )
-  }
-
   return (
-    <Home
-      onSelectTopic={selectTopic}
-      bookmarkCount={bookmarkCount}
-    />
+    <>
+      {/* Animated aurora background */}
+      <div className="aurora-canvas" aria-hidden="true">
+        <div className="aurora-blob" />
+        <div className="aurora-grid" />
+      </div>
+
+      <div className="relative z-10">
+        {screen === 'quiz' && activeTopic && (
+          <QuizMode
+            key={activeTopic.id + '_quiz'}
+            topic={activeTopic}
+            onBack={goHome}
+            onFinish={handleQuizFinish}
+            isBookmarked={isBookmarked}
+            onToggleBookmark={toggle}
+          />
+        )}
+        {screen === 'revise' && activeTopic && (
+          <ReviseMode
+            key={activeTopic.id + '_revise'}
+            topic={activeTopic}
+            onBack={goHome}
+            isBookmarked={isBookmarked}
+            onToggleBookmark={toggle}
+          />
+        )}
+        {screen === 'results' && activeTopic && quizResult && (
+          <Results
+            topic={activeTopic}
+            correct={quizResult.correct}
+            wrong={quizResult.wrong}
+            total={quizResult.total}
+            onRetry={() => selectTopic(activeTopic, 'quiz')}
+            onRevise={() => selectTopic(activeTopic, 'revise')}
+            onHome={goHome}
+          />
+        )}
+        {screen === 'home' && (
+          <Home
+            onSelectTopic={selectTopic}
+            bookmarkCount={bookmarkCount}
+          />
+        )}
+      </div>
+    </>
   )
 }

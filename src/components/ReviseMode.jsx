@@ -23,7 +23,6 @@ export default function ReviseMode({ topic, onBack, isBookmarked, onToggleBookma
     )
   }, [query, topic.data])
 
-  // Reset to page 1 when search changes
   useEffect(() => { setPage(1) }, [query])
 
   const totalPages = Math.ceil(filtered.length / PAGE_SIZE)
@@ -36,33 +35,41 @@ export default function ReviseMode({ topic, onBack, isBookmarked, onToggleBookma
   }
 
   return (
-    <div className="min-h-screen bg-slate-900">
+    <div className="min-h-screen">
       <Header title={topic.title} onBack={onBack} />
 
-      {/* Sticky toolbar: search + pagination */}
-      <div className="sticky top-14 z-40 bg-slate-900/95 backdrop-blur border-b border-slate-700/60">
+      {/* Sticky toolbar */}
+      <div
+        className="sticky top-14 z-40 backdrop-blur-md border-b"
+        style={{ background: 'rgba(10,14,40,0.92)', borderBottomColor: 'rgba(99,102,241,0.18)' }}
+      >
         <div className="max-w-3xl mx-auto px-4 py-3 flex items-center gap-3">
           {/* Search */}
           <div className="relative flex-1">
-            <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+            <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: '#4a4e80' }} />
             <input
               type="text"
               value={query}
               onChange={e => setQuery(e.target.value)}
               placeholder="প্রশ্ন, অপশন বা ব্যাখ্যায় খুঁজুন..."
-              className="w-full bg-slate-800 border border-slate-700 rounded-xl pl-9 pr-9 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-slate-500"
+              className="search-input w-full rounded-xl pl-9 pr-9 py-2 text-sm"
+              style={{
+                background: '#0f1433',
+                border: '1px solid rgba(99,102,241,0.18)',
+                color: '#ecedf8',
+              }}
             />
             {query && (
               <button
                 onClick={() => setQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
+                className="absolute right-3 top-1/2 -translate-y-1/2 hover:text-[#ecedf8] transition-colors"
+                style={{ color: '#4a4e80' }}
               >
                 <X size={14} />
               </button>
             )}
           </div>
 
-          {/* Pagination controls */}
           {totalPages > 1 && (
             <Pagination page={page} totalPages={totalPages} onGoTo={goTo} accent={topic.accent} />
           )}
@@ -70,12 +77,12 @@ export default function ReviseMode({ topic, onBack, isBookmarked, onToggleBookma
 
         {/* Counter row */}
         <div className="max-w-3xl mx-auto px-4 pb-2 flex items-center justify-between">
-          <p className="text-xs text-slate-500 font-mono">
+          <p className="text-xs font-mono" style={{ color: '#4a4e80' }}>
             {filtered.length} / {topic.data.length} questions
-            {query && <span className="ml-1 text-sky-400">"{query}"</span>}
+            {query && <span className="ml-1" style={{ color: '#22d3ee' }}>"{query}"</span>}
           </p>
           {totalPages > 1 && (
-            <p className="text-xs text-slate-500 font-mono">Page {page} / {totalPages}</p>
+            <p className="text-xs font-mono" style={{ color: '#4a4e80' }}>Page {page} / {totalPages}</p>
           )}
         </div>
       </div>
@@ -94,7 +101,7 @@ export default function ReviseMode({ topic, onBack, isBookmarked, onToggleBookma
             />
           ))}
           {filtered.length === 0 && (
-            <div className="text-center py-16 text-slate-500">
+            <div className="text-center py-16" style={{ color: '#4a4e80' }}>
               <Search size={32} className="mx-auto mb-3 opacity-40" />
               <p>কোনো প্রশ্ন পাওয়া যায়নি</p>
             </div>
@@ -125,22 +132,22 @@ function Pagination({ page, totalPages, onGoTo, accent }) {
       <button
         onClick={() => onGoTo(page - 1)}
         disabled={page === 1}
-        className="p-1.5 rounded-lg bg-slate-800 border border-slate-700 text-slate-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+        className="pag-btn p-1.5 rounded-lg"
       >
         <ChevronLeft size={14} />
       </button>
 
       {getPages().map((p, i) =>
         p === '...'
-          ? <span key={`e${i}`} className="w-6 text-center text-slate-500 text-xs">…</span>
+          ? <span key={`e${i}`} className="w-6 text-center text-xs" style={{ color: '#4a4e80' }}>…</span>
           : <button
               key={p}
               onClick={() => onGoTo(p)}
               className="w-8 h-8 rounded-lg text-xs font-semibold transition-all border"
               style={
                 p === page
-                  ? { background: accent, borderColor: accent, color: '#fff' }
-                  : { background: 'transparent', borderColor: '#334155', color: '#94a3b8' }
+                  ? { background: accent, borderColor: accent, color: '#fff', boxShadow: `0 2px 10px ${accent}44` }
+                  : { background: '#0f1433', borderColor: 'rgba(99,102,241,0.18)', color: '#7879c0' }
               }
             >
               {p}
@@ -150,7 +157,7 @@ function Pagination({ page, totalPages, onGoTo, accent }) {
       <button
         onClick={() => onGoTo(page + 1)}
         disabled={page === totalPages}
-        className="p-1.5 rounded-lg bg-slate-800 border border-slate-700 text-slate-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+        className="pag-btn p-1.5 rounded-lg"
       >
         <ChevronRight size={14} />
       </button>
@@ -160,24 +167,27 @@ function Pagination({ page, totalPages, onGoTo, accent }) {
 
 function QuestionCard({ item, num, accent, bookmarked, onBookmark }) {
   return (
-    <div className="bg-slate-800 rounded-2xl border border-slate-700 p-5 fade-in">
+    <div
+      className="rounded-2xl p-5 fade-in"
+      style={{ background: '#0f1433', border: '1px solid rgba(99,102,241,0.16)', boxShadow: '0 2px 12px rgba(0,0,0,0.2)' }}
+    >
       {/* Question header */}
       <div className="flex items-start gap-3 mb-4">
         <span
           className="shrink-0 w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold text-white"
-          style={{ background: accent + 'cc' }}
+          style={{ background: accent + 'cc', boxShadow: `0 2px 8px ${accent}33` }}
         >
           {num}
         </span>
-        <p className="text-white text-sm leading-relaxed flex-1">{item.question}</p>
+        <p className="text-sm leading-relaxed flex-1" style={{ color: '#ecedf8' }}>{item.question}</p>
         <button
           onClick={onBookmark}
-          className="shrink-0 p-1.5 rounded-lg hover:bg-slate-700 transition-colors"
+          className="shrink-0 p-1.5 rounded-lg hover:bg-[#141a3c] transition-colors"
           title="Bookmark"
         >
           {bookmarked
-            ? <BookmarkCheck size={16} className="text-amber-400" />
-            : <Bookmark size={16} className="text-slate-500" />
+            ? <BookmarkCheck size={16} style={{ color: '#f59e0b' }} />
+            : <Bookmark size={16} style={{ color: '#4a4e80' }} />
           }
         </button>
       </div>
@@ -189,34 +199,41 @@ function QuestionCard({ item, num, accent, bookmarked, onBookmark }) {
           return (
             <div
               key={i}
-              className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm border transition-colors ${
+              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm border transition-colors"
+              style={
                 isCorrect
-                  ? 'bg-emerald-500/15 border-emerald-500/50 text-emerald-300'
-                  : 'bg-slate-700/50 border-slate-600/50 text-slate-300'
-              }`}
+                  ? { background: 'rgba(34,197,94,0.10)', borderColor: 'rgba(34,197,94,0.40)', color: '#bbf7d0' }
+                  : { background: '#141a3c', borderColor: 'rgba(99,102,241,0.12)', color: '#7879c0' }
+              }
             >
               <span
-                className={`shrink-0 w-6 h-6 rounded-md flex items-center justify-center text-xs font-bold ${
-                  isCorrect ? 'bg-emerald-500 text-white' : 'bg-slate-600 text-slate-300'
-                }`}
+                className="shrink-0 w-6 h-6 rounded-md flex items-center justify-center text-xs font-bold"
+                style={
+                  isCorrect
+                    ? { background: '#22c55e', color: '#fff', boxShadow: '0 0 8px rgba(34,197,94,0.4)' }
+                    : { background: '#1e2450', color: '#7879c0' }
+                }
               >
                 {LETTERS[i]}
               </span>
               <span>{opt}</span>
               {isCorrect && (
-                <span className="ml-auto text-xs font-semibold text-emerald-400">✓ সঠিক</span>
+                <span className="ml-auto text-xs font-semibold" style={{ color: '#22c55e' }}>✓ সঠিক</span>
               )}
             </div>
           )
         })}
       </div>
 
-      {/* Bengali explanation */}
-      <div className="bg-slate-900/60 rounded-xl border border-slate-700/60 p-3">
-        <p className="text-xs font-semibold text-sky-400 mb-1.5 flex items-center gap-1.5">
+      {/* Explanation */}
+      <div
+        className="rounded-xl p-3"
+        style={{ background: '#0a0e28', border: '1px solid rgba(99,102,241,0.16)' }}
+      >
+        <p className="text-xs font-semibold mb-1.5 flex items-center gap-1.5" style={{ color: '#22d3ee' }}>
           <Lightbulb size={13} /> ব্যাখ্যা
         </p>
-        <p className="text-slate-300 text-sm leading-relaxed">{item.explanation_bn}</p>
+        <p className="text-sm leading-relaxed" style={{ color: '#7879c0' }}>{item.explanation_bn}</p>
       </div>
     </div>
   )
