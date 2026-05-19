@@ -32,11 +32,13 @@ export default function App() {
 
   return (
     <>
-      {/* Animated aurora background */}
-      <div className="aurora-canvas" aria-hidden="true">
-        <div className="aurora-blob" />
-        <div className="aurora-grid" />
-      </div>
+      {/* Animated aurora background — home screen only */}
+      {screen === 'home' && (
+        <div className="aurora-canvas" aria-hidden="true">
+          <div className="aurora-blob" />
+          <div className="aurora-grid" />
+        </div>
+      )}
 
       <div className="relative z-10">
         {screen === 'quiz' && activeTopic && (

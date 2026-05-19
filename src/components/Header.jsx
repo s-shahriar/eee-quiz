@@ -49,7 +49,7 @@ export default function Header({ title, onBack, progress, current, total, correc
 
       {progress && (
         <div className="h-1" style={{ background: '#141a3c' }}>
-          <div className="h-full progress-fill rounded-r-full" style={{ width: `${pct}%` }} />
+          <div className="h-full progress-fill rounded-r-full" style={{ '--progress': pct / 100 }} />
         </div>
       )}
     </header>
