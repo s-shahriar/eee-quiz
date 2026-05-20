@@ -1,6 +1,6 @@
 import { ArrowLeft, Zap } from 'lucide-react'
 
-export default function Header({ title, onBack, progress, current, total, correct, wrong }) {
+export default function Header({ title, onBack, progress, current, total, correct, wrong, extra }) {
   const pct = total ? Math.round((current / total) * 100) : 0
 
   return (
@@ -31,6 +31,8 @@ export default function Header({ title, onBack, progress, current, total, correc
         )}
 
         <span className="flex-1 text-sm font-medium truncate" style={{ color: '#ecedf8' }}>{title}</span>
+
+        {extra && extra}
 
         {total > 0 && (
           <span className="text-xs font-mono shrink-0" style={{ color: '#7879c0' }}>

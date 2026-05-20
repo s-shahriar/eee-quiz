@@ -5,6 +5,7 @@ import QuizMode from './components/QuizMode'
 import ReviseMode from './components/ReviseMode'
 import Results from './components/Results'
 import { useBookmarks } from './hooks/useBookmarks'
+import { TOPICS } from './data/topics'
 
 export default function App() {
   const [screen, setScreen] = useState('home')
@@ -55,7 +56,9 @@ export default function App() {
           <ReviseMode
             key={activeTopic.id + '_revise'}
             topic={activeTopic}
+            topics={TOPICS}
             onBack={goHome}
+            onChangeTopic={(t) => setActiveTopic(t)}
             isBookmarked={isBookmarked}
             onToggleBookmark={toggle}
           />

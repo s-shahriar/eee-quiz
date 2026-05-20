@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react'
-import { Search, Bookmark, BookmarkCheck, X, Lightbulb, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Search, Bookmark, BookmarkCheck, X, Lightbulb, ChevronLeft, ChevronRight, LayoutGrid } from 'lucide-react'
 import Header from './Header'
 
 const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F']
@@ -9,9 +9,10 @@ function normalize(str) {
   return str.toLowerCase().trim()
 }
 
-export default function ReviseMode({ topic, onBack, isBookmarked, onToggleBookmark }) {
+export default function ReviseMode({ topic, topics, onBack, onChangeTopic, isBookmarked, onToggleBookmark }) {
   const [query, setQuery] = useState('')
   const [page, setPage] = useState(1)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   const filtered = useMemo(() => {
     if (!query.trim()) return topic.data
@@ -36,7 +37,88 @@ export default function ReviseMode({ topic, onBack, isBookmarked, onToggleBookma
 
   return (
     <div className="min-h-screen">
-      <Header title={topic.title} onBack={onBack} />
+      {/* Category sidebar overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 z-40"
+          style={{ background: 'rgba(0,0,0,0.45)', backdropFilter: 'blur(2px)' }}
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      {/* Category sidebar panel */}
+      <aside
+        className="fixed top-0 right-0 bottom-0 z-50 flex flex-col"
+        style={{
+          width: 272,
+          background: 'rgba(10,14,40,0.97)',
+          borderLeft: '1px solid rgba(99,102,241,0.26)',
+          boxShadow: '-8px 0 40px rgba(0,0,0,0.4)',
+          backdropFilter: 'blur(18px)',
+          transform: sidebarOpen ? 'translateX(0)' : 'translateX(100%)',
+          transition: 'transform 0.28s cubic-bezier(0.34,1.10,0.64,1)',
+        }}
+      >
+        <div className="flex items-center justify-between px-4 py-4 border-b shrink-0" style={{ borderColor: 'rgba(99,102,241,0.18)' }}>
+          <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest" style={{ color: '#7879c0' }}>
+            <LayoutGrid size={14} /> Categories
+          </span>
+          <button
+            onClick={() => setSidebarOpen(false)}
+            className="w-7 h-7 rounded-full flex items-center justify-center transition-colors hover:bg-[#141a3c]"
+            style={{ color: '#4a4e80', border: '1px solid rgba(99,102,241,0.18)' }}
+          >
+            <X size={14} />
+          </button>
+        </div>
+
+        <div className="flex-1 overflow-y-auto py-2 px-2 flex flex-col gap-1">
+          {(topics || []).map(t => {
+            const Icon = t.Icon
+            const isCurrent = t.id === topic.id
+            return (
+              <button
+                key={t.id}
+                disabled={isCurrent}
+                onClick={() => { if (!isCurrent) { onChangeTopic(t); setSidebarOpen(false) } }}
+                className="flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-left text-sm transition-all border"
+                style={isCurrent
+                  ? { background: topic.accent + '1a', borderColor: topic.accent + '55', color: topic.accent, cursor: 'default', fontWeight: 600 }
+                  : { background: 'transparent', borderColor: 'transparent', color: '#7879c0' }
+                }
+                onMouseEnter={e => { if (!isCurrent) { e.currentTarget.style.background = t.accent + '14'; e.currentTarget.style.borderColor = t.accent + '40'; e.currentTarget.style.color = t.accent } }}
+                onMouseLeave={e => { if (!isCurrent) { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = 'transparent'; e.currentTarget.style.color = '#7879c0' } }}
+              >
+                <span
+                  className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
+                  style={{ background: t.accent + '22', border: `1px solid ${t.accent}33`, color: t.accent }}
+                >
+                  {Icon && <Icon size={14} />}
+                </span>
+                <span className="flex-1 truncate">{t.title}</span>
+                {isCurrent && (
+                  <span className="text-xs font-bold px-1.5 py-0.5 rounded" style={{ background: topic.accent + '22', color: topic.accent, fontSize: '0.6rem', letterSpacing: '0.05em' }}>
+                    NOW
+                  </span>
+                )}
+              </button>
+            )
+          })}
+        </div>
+      </aside>
+
+      <Header title={topic.title} onBack={onBack} extra={
+        topics && onChangeTopic && (
+          <button
+            onClick={() => setSidebarOpen(true)}
+            className="p-2 rounded-lg transition-colors hover:bg-[#141a3c]"
+            style={{ color: '#7879c0' }}
+            title="Browse categories"
+          >
+            <LayoutGrid size={18} />
+          </button>
+        )
+      } />
 
       {/* Sticky toolbar */}
       <div
